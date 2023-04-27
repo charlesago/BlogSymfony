@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% form_theme formCom 'bootstrap_5_layout.html.twig' %}
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container border border-black mt-5 mb-3 p-3">
+
+
+        <h1>{{ post.title }}</h1>
+
+        <p>{{ post.content }}</p>
+
+    <a href="{{ path('app_post')}}" class="btn btn-secondary">Retour</a>
+    <a href="{{ path('delete_post', {id:post.id}) }}" class="btn btn-danger">Delete</a>
+    <a href="{{ path('update_post', {id:post.id}) }}" class="btn btn-warning">Update</a>
+
+</div>
+
+   <h1>Commentaire</h1>
+
+<div class="container ">
+    {% for comment in post.comments %}
+    <div class=" border border-black mt-2 p-2 d-flex justify-content-between align-items-center">
+        <div>
+        <p><strong>{{ comment.content }}</strong></p>
+        <p>{{ comment.createdAt|date("d/m/Y - H:s") }}</p>
+        </div>
+        <div>
+        <a href="{{ path('delete_comment', {id:comment.id}) }}" class="btn btn-danger">Delete</a>
+        <a href="{{ path('update_comment', {id:comment.id}) }}" class="btn btn-warning">Update</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+    <div class="container mt-3">
+        <h1>Donne ton avis</h1>
+        {{ form_start(formCom, {'action':path('create_comment', {id:post.id})}) }}
+
+
+        {{ form_row(formCom.content) }}
+
+
+        <button type="submit" class="btn btn-success">Go</button>
+
+        {{ form_end(formCom) }}
+
+    </div>
+{% endblock %}

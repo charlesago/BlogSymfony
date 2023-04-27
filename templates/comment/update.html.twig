@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formCom 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Modifier ton commentaire</h1>
+
+    {{ form_start(formCom)}}
+
+
+    {{ form_row(formCom.content) }}
+
+
+    <button type="submit" class="btn btn-success">Go</button>
+
+    {{ form_end(formCom) }}
+
+
+{% endblock %}
